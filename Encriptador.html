@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function copiarTextoDesencriptado() {
+            var textoDesencriptado = document.getElementById("texto-desencriptado").value;
+
+            // Crea un elemento de textarea temporal
+            var tempTextarea = document.createElement("textarea");
+            tempTextarea.value = textoDesencriptado;
+            document.body.appendChild(tempTextarea);
+
+            // Selecciona y copia el texto del textarea temporal
+            tempTextarea.select();
+            document.execCommand("copy");
+
+            // Elimina el textarea temporal
+            document.body.removeChild(tempTextarea);
+
+            // Mostrar una notificación o realizar cualquier otra acción deseada
+            alert("¡Texto desencriptado copiado al portapapeles!");
+    }
+        function encriptar() {
+            var textoOriginal = document.getElementById("texto-original").value;
+            var textoEncriptado = "";
+        
+            for (var i = 0; i < textoOriginal.length; i++) {
+                var letra = textoOriginal[i];
+        
+                switch (letra) {
+                case "e":
+                    textoEncriptado += "enter";
+                    break;
+                case "i":
+                    textoEncriptado += "imes";
+                    break;
+                case "a":
+                    textoEncriptado += "ai";
+                    break;
+                case "o":
+                    textoEncriptado += "ober";
+                    break;
+                case "u":
+                    textoEncriptado += "ufat";
+                    break;
+                default:
+                    textoEncriptado += letra;
+                }
+            }
+        
+            document.getElementById("texto-desencriptado").value = textoEncriptado;
+            }
+        
+            function desencriptar() {
+            var textoEncriptado = document.getElementById("texto-original").value;
+            var textoDesencriptado = "";
+        
+            for (var i = 0; i < textoEncriptado.length; i++) {
+                if (textoEncriptado[i] === "e" && textoEncriptado[i + 1] === "n" && textoEncriptado[i + 2] === "t" && textoEncriptado[i + 3] === "e" && textoEncriptado[i + 4] === "r") {
+                textoDesencriptado += "e";
+                i += 4;
+                } else if (textoEncriptado[i] === "i" && textoEncriptado[i + 1] === "m" && textoEncriptado[i + 2] === "e" && textoEncriptado[i + 3] === "s") {
+                textoDesencriptado += "i";
+                i += 3;
+                } else if (textoEncriptado[i] === "a" && textoEncriptado[i + 1] === "i") {
+                textoDesencriptado += "a";
+                i += 1;
+                } else if (textoEncriptado[i] === "o" && textoEncriptado[i + 1] === "b" && textoEncriptado[i + 2] === "e" && textoEncriptado[i + 3] === "r") {
+                textoDesencriptado += "o";
+                i += 3;
+                } else if (textoEncriptado[i] === "u" && textoEncriptado[i + 1] === "f" && textoEncriptado[i + 2] === "a" && textoEncriptado[i + 3] === "t") {
+                textoDesencriptado += "u";
+                i += 3;
+                } else {
+                textoDesencriptado += textoEncriptado[i];
+                }
+            }
+        
+            document.getElementById("texto-desencriptado").value = textoDesencriptado;
+        }
+        function mostrarElemento() {
+    var divIma = document.getElementById("ima");
+    var divOculto = document.getElementById("oculto");
+    var divResul = document.querySelector(".result");
+    var divResulB = document.querySelector(".result");
+    var textoOriginal = document.getElementById("texto-original");
+    var divtextoOriginal = document.getElementById("texto-original");
+
+    var regex = /^[a-z\s]+$/; // Expresión regular para verificar letras sin acentos y letras mayúsculas
+    
+    if (textoOriginal.value.trim() !== "") {
+
+        if (regex.test(textoOriginal.value.trim())) {
+        // Si el campo de texto no contiene mayúsculas ni acentos
+        divIma.style.display = "none";
+        divOculto.style.display = "block";
+        divResul.style.boxShadow = "0px 24px 32px -8px rgba(0, 0, 0, 0.9)";
+        divResulB.style.background = "rgba(0, 0, 0, 0.2)";
+        divtextoOriginal.style.color = "#0A3871";
+
+      } else {
+        // Si el campo de texto contiene mayúsculas, minúsculas o acentos
+        // Realizar la acción específica que deseas
+        // Por ejemplo:
+        divtextoOriginal.style.color = "red";
+        alert("El campo de texto contiene mayúsculas o acentos");
+
+    }
+}
+        }
+
+
+
+      </script>
+    <meta charset="UTF-8">
+        <title>Fidel el Encriptador</title>
+        <link rel="stylesheet" href="reset.css">
+        <link rel="stylesheet" href="style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+
+        <a href="https://www.aluracursos.com/"> <img src="imagenes/logo.PNG" alt="Logo" id="logo" ></a>
+    </head>
+    <body>
+
+        <div class="cuerpo"> 
+            <textarea cols="40" rows="9" type="text" id="texto-original" placeholder="Descifra los secretos y plasma tus palabras en este enigma....."></textarea><br>
+            
+            <div class="caja1">
+                <p>&#10071 Solo las letras en su forma más humilde podrán ser admitidas</p>
+                <button id="btn1" onclick="encriptar() ; mostrarElemento()">Encriptar</button>
+                <button id="btn2" onclick="desencriptar(); mostrarElemento()">Desencriptar</button><br>
+            </div>
+            
+            <section class="result">
+                <div id="ima">
+                    <img  id="niña" src="imagenes/niña.PNG">
+                    <p id="detector">Aquí no hay nada Sherlock ;)</p>
+                </div>
+                <div id="oculto">            
+  
+                    <textarea id="texto-desencriptado" readonly></textarea><br>
+                    <label for="mensaje">¡Ehureka!</label>
+
+                    <button id="btn3" onclick="copiarTextoDesencriptado()">Copiar</button>
+                </div>
+            </section>
+
+            
+
+        </div>
+        <footer>
+            <p class="copyright">&copy Copyright José García :)</p>
+        </footer>
+    </body>
+
+  
+</html>
